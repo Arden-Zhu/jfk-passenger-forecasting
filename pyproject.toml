@@ -1,0 +1,61 @@
+[project]
+name = "jfk-passenger-forecasting"
+version = "0.1.0"
+description = "Forecasting daily passenger throughput at JFK Airport using classical ML and deep learning"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+dependencies = [
+    # Data manipulation
+    "pandas>=2.1.0",
+    "numpy>=1.24.0",
+    "openpyxl>=3.1.0",
+
+    # Visualization
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+
+    # Machine Learning
+    "scikit-learn>=1.3.0",
+    "xgboost>=2.0.0",
+
+    # Time Series & Statistics
+    "statsmodels>=0.14.0",
+    "pmdarima>=2.0.0",
+    "scipy>=1.10.0",
+
+    # Calendar / holidays
+    "holidays>=0.30",
+
+    # Utilities
+    "python-dotenv>=1.0.0",
+    "joblib>=1.3.0",
+]
+
+# NOTE: PyTorch is installed via conda (environment.yml), not here.
+# This avoids platform-specific build issues with pip/uv.
+
+[project.optional-dependencies]
+dev = [
+    # Jupyter
+    "jupyter>=1.0.0",
+    "notebook>=7.0.0",
+    "ipykernel>=6.29.0",
+
+    # Code quality
+    "ruff>=0.4.0",
+
+    # Testing
+    "pytest>=7.0.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

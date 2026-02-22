@@ -1,0 +1,28 @@
+###############################################################################
+# Conda Environment for JFK Passenger Forecasting
+###############################################################################
+# This file creates the base conda environment with Python, uv, and PyTorch.
+# All other Python packages are managed by uv via pyproject.toml.
+#
+# Setup instructions:
+#   Step 1: conda env create -f environment.yml
+#   Step 2: conda activate jfk-forecast
+#   Step 3: uv pip install -e ".[dev]" 
+#
+###############################################################################
+
+name: jfk-forecast
+
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+  - pip
+  - uv
+
+  # PyTorch (conda auto-detects CPU/CUDA)
+  - pytorch>=2.1
+  - cpuonly               # remove this line if you have an NVIDIA GPU
