@@ -74,6 +74,12 @@ columns**.
 | Weather | Temperature (TAVG/TMAX/TMIN), precipitation, snowfall, wind speed, severe weather flags (fog, thunder, ice, etc.) |
 | Event dummies | covid_acute (Mar–Jun 2020), covid_recovery (Jul 2020–Jun 2022); baseline = normal operations |
 
+**Prediction framing:** We predict next-day throughput (day $t+1$) using
+historical throughput up to day $t$ and day $t+1$'s scheduled departures and
+weather forecast (both available in advance). Multi-step forecasts (7- or
+30-day) can be produced recursively by feeding each prediction back as lag
+input.
+
 Detailed rationale for each feature engineering decision (e.g., departures-only,
 COVID encoding, same-weekday-last-year vs lag_365, SARIMAX feature set
 separation) is documented in
