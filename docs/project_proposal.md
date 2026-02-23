@@ -77,7 +77,7 @@ columns**.
 Detailed rationale for each feature engineering decision (e.g., departures-only,
 COVID encoding, same-weekday-last-year vs lag_365, SARIMAX feature set
 separation) is documented in
-[`docs/feature_engineering_decisions.md`](docs/feature_engineering_decisions.md).
+[`feature_engineering_decisions.md`](feature_engineering_decisions.md).
 
 ### 3.3 Models
 
@@ -105,7 +105,7 @@ separation) is documented in
   RQ3: (1) autoregressive only, (2) + calendar/holiday, (3) + weather,
   (4) + scheduled_departures, (5) + COVID dummies, (6) all combined. Each
   group is added independently to the same baseline. Full design in
-  [`docs/rq3_ablation_design.md`](docs/rq3_ablation_design.md).
+  [`rq3_ablation_design.md`](rq3_ablation_design.md).
 
 ### 3.5 Tools
 
@@ -115,4 +115,4 @@ Project follows the Cookiecutter Data Science template.
 
 ## 4. Preliminary Findings (from EDA)
 
-See [`docs/eda_findings.md`](docs/eda_findings.md).
+See [`eda_findings.md`](eda_findings.md).
