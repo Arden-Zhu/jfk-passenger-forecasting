@@ -77,7 +77,7 @@ analysis to assess interpretability.
 
 | Dataset | Source URL | Format | Records | Period | License |
 |---------|-----------|--------|---------|--------|---------|
-| TSA checkpoint throughput (JFK) | [TSA FOIA Reading Room](https://www.tsa.gov/foia/readingroom) | PDF → CSV | 2,337 daily | Dec 2018 – May 2025 | Public domain (FOIA) |
+| TSA checkpoint throughput (JFK) | [mikelor/TsaThroughput (GitHub)](https://github.com/mikelor/TsaThroughput) | CSV | 2,337 daily | Dec 2018 – May 2025 | MIT |
 | NOAA daily weather (JFK station) | [NOAA CDO (Station USW00094789)](https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USW00094789/detail) | CSV | 3,319 daily | Jan 2017 – Feb 2026 | Public domain |
 | BTS On-Time Performance (JFK) | [BTS TranStats](https://www.transtats.bts.gov/Tables.asp?DB_ID=120) | CSV (zipped) | 2,373 daily | Jan 2019 – Jun 2025 | Public domain |
 | U.S. federal holidays | Python `holidays` library | generated | matching target period | MIT |
