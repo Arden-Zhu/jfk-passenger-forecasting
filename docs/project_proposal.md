@@ -56,7 +56,8 @@ analysis to assess interpretability.
    efficiency?** Given ~2,300 samples and rich engineered features, we expect
    gradient-boosted trees to deliver the best tradeoff. Models are compared
    across accuracy (MAE, RMSE, MAPE, R²), robustness (full vs post-recovery
-   test set), and computational efficiency.
+   test set, and a temporal shift experiment training on post-recovery data
+   only), and computational efficiency.
 
 3. **What is the marginal predictive contribution of each feature group
    (calendar/holiday, weather, scheduled flights, COVID dummies) beyond
@@ -114,6 +115,7 @@ separation) is documented in
 
 | Category | Model | Rationale |
 |----------|-------|-----------|
+| Naive baseline | Seasonal Naive (shift-7) | Predict using same weekday last week; anchor for ML value |
 | Statistical baseline | SARIMAX | Classical time series benchmark with seasonality |
 | Classical ML | Ridge Regression | Linear baseline with regularization |
 | Classical ML | Random Forest | Non-linear ensemble (bagging); robust, interpretable feature importance |
@@ -123,6 +125,9 @@ separation) is documented in
 
 ### 4.4 Evaluation
 
+- **Naive baseline:** A seasonal naive model (predict day $t+1$ using day
+  $t+1-7$, i.e., same weekday last week) serves as the non-ML anchor. All ML
+  models must demonstrably outperform this baseline to justify their complexity.
 - **Split strategy:** Time-based train/test split (80/20); TimeSeriesSplit
   cross-validation for hyperparameter tuning.
 - **Metrics:** MAPE (primary), MAE, RMSE, R².
@@ -132,6 +137,14 @@ separation) is documented in
   post-recovery subset (Jul 2022 onward). We considered a continuous recovery
   curve but opted for dummies — simpler, no target leakage risk, and the
   continuous encoding does not improve post-recovery forecasting.
+- **Temporal shift test (RQ2 robustness):** To assess whether COVID-era data
+  helps or hurts forecasting performance, we compare two training
+  configurations using the best-performing model: (a) default training on the
+  full dataset, and (b) training on post-recovery data only (Jul 2022 – Jun
+  2024), both tested on the same held-out period (Jul 2024 – May 2025). If
+  the post-recovery-only model matches or exceeds the default, it suggests
+  that COVID-era observations add noise rather than signal, with a practical
+  implication that only recent data is needed for deployment.
 - **Ablation study:** Train the best model under six configurations to answer
   RQ3: (1) autoregressive only, (2) + calendar/holiday, (3) + weather,
   (4) + scheduled_departures, (5) + COVID dummies, (6) all combined. Each
