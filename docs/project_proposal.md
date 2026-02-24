@@ -19,7 +19,31 @@ against deep learning** on a real-world time series problem, providing empirical
 evidence for which approach is better suited for airport operational forecasting
 at this data scale.
 
-## 2. Research Questions
+## 2. Prior Work
+
+Zachariah et al. (2024) compared neural network models (RNN, LSTM, GRU) against
+ARIMA/SARIMA/SARIMAX for short-term forecasting of daily TSA checkpoint
+passenger flows at five major U.S. airports during the pandemic, finding that
+RNN outperformed SARIMA by 34% at Atlanta's airport.
+([Journal of Air Transport Management, 2024](https://www.sciencedirect.com/science/article/abs/pii/S0969699723001680))
+
+Yi & Guo (DHS/TSA research) applied polynomial regression to predict hourly and
+daily TSA checkpoint throughput at LAX, demonstrating that ML-based scheduling
+tools can improve TSA staffing decisions.
+([EasyChair preprint](https://easychair.org/publications/paper/bk2D/download))
+
+BTS (2024) used simple linear regression to estimate monthly passenger
+enplanements from TSA screening counts, achieving R² > 0.99 on post-pandemic
+data, confirming the strong link between TSA throughput and flight operations.
+([BTS Technical Report](https://www.bts.gov/browse-statistical-products-and-data/preliminary-estimates/preliminary-estimates-enplanements-tsa))
+
+Our project differs from prior work in three ways: (1) we incorporate three
+external data sources (weather, flight schedules, holidays) rather than
+throughput alone, (2) we compare six model families head-to-head including a
+systematic ablation study, and (3) we provide cross-model feature importance
+analysis to assess interpretability.
+
+## 3. Research Questions
 
 1. **How accurately can daily JFK passenger throughput be predicted using
    engineered time series features, weather data, and scheduled flight counts?**
@@ -47,21 +71,22 @@ at this data scale.
    whether the identified key drivers are consistent across architectures, or
    whether different models rely on fundamentally different signals.
 
-## 3. Methods
+## 4. Methods
 
-### 3.1 Data
+### 4.1 Data
 
-| Dataset | Records | Period | Role |
-|---------|---------|--------|------|
-| TSA checkpoint throughput (JFK) | 2,337 daily | Dec 2018 – May 2025 | Target variable (departing passengers screened) |
-| NOAA daily weather (JFK station) | 3,319 daily | Jan 2017 – Feb 2026 | Weather features |
-| BTS On-Time Performance (JFK) | 2,373 daily | Jan 2019 – Jun 2025 | Scheduled departure counts |
-| U.S. federal holidays | generated | matching target period | Calendar features |
+| Dataset | Source URL | Format | Records | Period | License |
+|---------|-----------|--------|---------|--------|---------|
+| TSA checkpoint throughput (JFK) | [TSA FOIA Reading Room](https://www.tsa.gov/foia/readingroom) | PDF → CSV | 2,337 daily | Dec 2018 – May 2025 | Public domain (FOIA) |
+| NOAA daily weather (JFK station) | [NOAA CDO (Station USW00094789)](https://www.ncdc.noaa.gov/cdo-web/datasets/GHCND/stations/GHCND:USW00094789/detail) | CSV | 3,319 daily | Jan 2017 – Feb 2026 | Public domain |
+| BTS On-Time Performance (JFK) | [BTS TranStats](https://www.transtats.bts.gov/Tables.asp?DB_ID=120) | CSV (zipped) | 2,373 daily | Jan 2019 – Jun 2025 | Public domain |
+| U.S. federal holidays | Python `holidays` library | generated | matching target period | MIT |
 
-After merging on date, the final modeling dataset contains **2,337 rows × 30
-columns**.
+All datasets are freely downloadable with no login, application, or payment
+required. After merging on date, the final modeling dataset contains **2,337
+rows × 30 columns**.
 
-### 3.2 Feature Engineering
+### 4.2 Feature Engineering
 
 | Category | Features |
 |----------|----------|
@@ -85,7 +110,7 @@ COVID encoding, same-weekday-last-year vs lag_365, SARIMAX feature set
 separation) is documented in
 [`feature_engineering_decisions.md`](feature_engineering_decisions.md).
 
-### 3.3 Models
+### 4.3 Models
 
 | Category | Model | Rationale |
 |----------|-------|-----------|
@@ -96,7 +121,7 @@ separation) is documented in
 | Classical ML | SVR (RBF kernel) | Kernel-based non-linear regression |
 | Deep Learning (optional) | LSTM | Recurrent neural network for sequence modeling |
 
-### 3.4 Evaluation
+### 4.4 Evaluation
 
 - **Split strategy:** Time-based train/test split (80/20); TimeSeriesSplit
   cross-validation for hyperparameter tuning.
@@ -113,12 +138,12 @@ separation) is documented in
   group is added independently to the same baseline. Full design in
   [`rq3_ablation_design.md`](rq3_ablation_design.md).
 
-### 3.5 Tools
+### 4.5 Tools
 
 Python (pandas, scikit-learn, XGBoost, statsmodels, pmdarima, PyTorch),
 Jupyter Notebooks, Matplotlib/Seaborn. Environment managed with conda + uv.
 Project follows the Cookiecutter Data Science template.
 
-## 4. Preliminary Findings (from EDA)
+## 5. Preliminary Findings (from EDA)
 
 See [`eda_findings.md`](eda_findings.md).
