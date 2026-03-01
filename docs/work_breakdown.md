@@ -21,7 +21,7 @@ reviewing.
 
 | ID | Task | Owner | Deliverables | Depends on |
 |----|------|-------|-------------|------------|
-| 2.1 | Naive baseline (shift-7) | | Predictions CSV (same weekday last week), metrics; anchor for all model comparisons | 1.2 |
+| 2.1 | Naive baseline (shift-7) | | Predictions, metrics; anchor for all model comparisons | 1.2 |
 | 2.2 | SARIMAX | | Trained model, predictions, metrics, training time, standardized coefficients for RQ4 | 1.2 |
 | 2.3 | Ridge Regression | | Trained model, predictions, metrics, training time, standardized coefficients for RQ4 | 1.2 |
 | 2.4 | Random Forest | | Trained model, predictions, metrics, training time, `feature_importances_` for RQ4 | 1.2 |
