@@ -21,12 +21,13 @@ reviewing.
 
 | ID | Task | Owner | Deliverables | Depends on |
 |----|------|-------|-------------|------------|
-| 2.1 | SARIMAX baseline | | Trained model, predictions, metrics, training time, standardized coefficients for RQ4 | 1.2 |
-| 2.2 | Ridge Regression | | Trained model, predictions, metrics, training time, standardized coefficients for RQ4 | 1.2 |
-| 2.3 | Random Forest | | Trained model, predictions, metrics, training time, `feature_importances_` for RQ4 | 1.2 |
-| 2.4 | XGBoost | | Trained model, predictions, metrics, training time, `feature_importances_` for RQ4 | 1.2 |
-| 2.5 | SVR (RBF kernel) | | Trained model, predictions, metrics, training time, permutation importance for RQ4 | 1.2 |
-| 2.6 | LSTM (optional) | | Trained model, predictions, metrics, training time, permutation importance or gradient attribution for RQ4 | 1.2 |
+| 2.1 | Naive baseline (shift-7) | | Predictions CSV (same weekday last week), metrics; anchor for all model comparisons | 1.2 |
+| 2.2 | SARIMAX | | Trained model, predictions, metrics, training time, standardized coefficients for RQ4 | 1.2 |
+| 2.3 | Ridge Regression | | Trained model, predictions, metrics, training time, standardized coefficients for RQ4 | 1.2 |
+| 2.4 | Random Forest | | Trained model, predictions, metrics, training time, `feature_importances_` for RQ4 | 1.2 |
+| 2.5 | XGBoost | | Trained model, predictions, metrics, training time, `feature_importances_` for RQ4 | 1.2 |
+| 2.6 | SVR (RBF kernel) | | Trained model, predictions, metrics, training time, permutation importance for RQ4 | 1.2 |
+| 2.7 | LSTM (optional) | | Trained model, predictions, metrics, training time, permutation importance or gradient attribution for RQ4 | 1.2 |
 
 **Notes:**
 - Each model must use TimeSeriesSplit CV for hyperparameter tuning.
@@ -45,7 +46,7 @@ reviewing.
 | 3.1 | RQ1 — Prediction accuracy | | Best MAPE reported, comparison against 10% hypothesis | All of Phase 2 |
 | 3.2 | RQ2 — Model comparison | | Comparison table (6 models × 4 metrics × 2 test sets), training time comparison, winner identified | All of Phase 2 |
 | 3.3 | RQ3 — Ablation study | | 6 configs × 4 metrics table, marginal contribution of each feature group | Best model from 3.2, plus 1.2 |
-| 3.4 | RQ4 — Feature importance | | Cross-model ranking table, Spearman correlations, agreement analysis | Feature importances from 2.1–2.6 |
+| 3.4 | RQ4 — Feature importance | | Cross-model ranking table, Spearman correlations, agreement analysis | Feature importances from 2.2–2.7 |
 
 ---
 
@@ -65,7 +66,7 @@ reviewing.
 ## Summary: Critical Path
 
 ```
-1.0 (done) → 1.1 (done) → 1.2 → [2.1–2.6 in parallel] → [3.1–3.4] → [4.3–4.6]
+1.0 (done) → 1.1 (done) → 1.2 → [2.1–2.7 in parallel] → [3.1–3.4] → [4.3–4.6]
                                                             4.1–4.2 can start now
 ```
 
