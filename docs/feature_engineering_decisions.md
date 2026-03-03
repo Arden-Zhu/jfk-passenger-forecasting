@@ -110,4 +110,23 @@ transforms rather than one-hot encoding or raw integers.
 
 ---
 
+## 6. Drop Quarter (redundant with month encoding)
+
+**Decision:** Drop `quarter` entirely rather than keeping it as a raw integer
+or cyclical-encoding it.
+
+**Alternatives considered:**
+- **Keep as raw integer (1–4):** Implies Q4 > Q1 to linear models, which is
+  meaningless. Tree-based models handle it fine, but it adds no signal they
+  can't already get from month encoding.
+- **Cyclical encode (sin/cos):** Correct but adds 2 columns that mostly
+  duplicate the finer-grained `month_sin`/`month_cos`.
+
+**Rationale:** `month_sin`/`month_cos` already capture seasonal patterns at
+monthly granularity. Quarter is a strictly coarser version of the same signal
+— any split a tree makes on quarter, it can make on month. Dropping it
+reduces dimensionality by 1 with no information loss.
+
+---
+
 *This document is updated as new decisions arise during Notebooks 02–04.*
