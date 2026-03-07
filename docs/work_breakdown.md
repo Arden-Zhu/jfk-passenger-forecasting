@@ -45,7 +45,7 @@ reviewing.
 |----|------|-------|-------------|------------|
 | 3.1 | RQ1 — Prediction accuracy | | Best MAPE reported, comparison against 10% hypothesis | All of Phase 2 |
 | 3.2 | RQ2 — Model comparison | | Comparison table (6 models × 4 metrics × 2 test sets), training time comparison, winner identified | All of Phase 2 |
-| 3.3 | RQ3 — Ablation study | | 6 configs × 4 metrics table, marginal contribution of each feature group | Best model from 3.2, plus 1.2 |
+| 3.3 | RQ3 — Ablation study | Hao | 6 configs × 4 metrics table, marginal contribution of each feature group | Best model from 3.2, plus 1.2 |
 | 3.4 | RQ4 — Feature importance | | Cross-model ranking table, Spearman correlations, agreement analysis | Feature importances from 2.2–2.7 |
 
 ---
